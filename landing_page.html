@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa Ledger | Master Your Finances</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #050505; color: white; overflow-x: hidden; }
+        .glass { background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .text-gradient { background: linear-gradient(to right, #10b981, #34d399, #6ee7b7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .float { animation: float 6s ease-in-out infinite; }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <header class="fixed top-0 w-full z-50 glass py-4 px-8 flex justify-between items-center">
+        <div class="text-2xl font-black tracking-tighter">NEXA<span class="text-emerald-500">_</span>LEDGER</div>
+        <nav class="hidden md:flex gap-8 text-xs font-bold uppercase tracking-widest text-white/40">
+            <a href="#features" class="hover:text-emerald-400 transition-colors">Features</a>
+            <a href="#stats" class="hover:text-emerald-400 transition-colors">Analytics</a>
+            <a href="#pricing" class="hover:text-emerald-400 transition-colors">Pricing</a>
+        </nav>
+        <div class="flex gap-4">
+            <button class="px-6 py-2 text-sm font-bold text-white/60 hover:text-white transition-colors">Login</button>
+            <button class="px-8 py-2 bg-emerald-600 hover:bg-emerald-500 text-black font-black rounded-full shadow-[0_10px_20px_rgba(16,185,129,0.2)] transition-all">Get Started</button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-40 pb-32 flex flex-col items-center">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[600px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <div class="relative z-10 max-w-5xl text-center px-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-emerald-400 text-[10px] font-black tracking-[0.3em] uppercase mb-10 reveal">
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                Next-Gen Intelligence
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-black tracking-tight leading-[0.85] mb-8 reveal">
+                The Future of <br>
+                <span class="text-gradient italic font-serif">Personal Finance.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-white/40 max-w-2xl mx-auto leading-relaxed mb-12 reveal">
+                Stop guessing where your money goes. Experience cinematic financial tracking with AI-driven insights and enterprise-grade security.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-6 mb-20 reveal">
+                <button class="h-16 px-10 text-lg bg-emerald-600 hover:bg-emerald-500 text-black font-black rounded-full shadow-[0_20px_40px_rgba(16,185,129,0.2)] transition-all">Start Your Journey</button>
+                <button class="h-16 px-10 text-lg glass text-white rounded-full transition-all flex items-center gap-3">Watch Demo</button>
+            </div>
+        </div>
+
+        <!-- Dashboard Mockup -->
+        <div class="relative w-full max-w-6xl px-6 reveal">
+            <div class="p-2 rounded-[2.5rem] bg-gradient-to-b from-white/10 to-transparent">
+                <div class="relative overflow-hidden rounded-[2rem] bg-[#0A0A0A] border border-white/10 aspect-video">
+                    <img src="https://picsum.photos/seed/dashboard/1200/800" alt="Dashboard" class="w-full h-full object-cover opacity-60">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.5)] cursor-pointer hover:scale-110 transition-transform">
+                            <svg class="w-8 h-8 fill-black" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-24 border-y border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12">
+            <div class="flex flex-col items-center reveal">
+                <span class="text-4xl md:text-5xl font-black mb-2">50K+</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-500/60">Active Users</span>
+            </div>
+            <div class="flex flex-col items-center reveal">
+                <span class="text-4xl md:text-5xl font-black mb-2">$2.5B</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-500/60">Tracked</span>
+            </div>
+            <div class="flex flex-col items-center reveal">
+                <span class="text-4xl md:text-5xl font-black mb-2">4.9/5</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-500/60">Rating</span>
+            </div>
+            <div class="flex flex-col items-center reveal">
+                <span class="text-4xl md:text-5xl font-black mb-2">99.9%</span>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-emerald-500/60">Uptime</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-xs font-bold uppercase tracking-[0.3em] text-emerald-500 mb-4">Features</h2>
+                <h3 class="text-4xl md:text-6xl font-black tracking-tight">Everything you need.</h3>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 rounded-[2.5rem] glass hover:border-emerald-500/30 transition-all reveal">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Real-time Sync</h4>
+                    <p class="text-white/40 text-sm leading-relaxed">Your data is synced across all devices instantly with zero latency.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] glass hover:border-emerald-500/30 transition-all reveal">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">Military Grade</h4>
+                    <p class="text-white/40 text-sm leading-relaxed">Encryption that keeps your financial life private and secure.</p>
+                </div>
+                <div class="p-8 rounded-[2.5rem] glass hover:border-emerald-500/30 transition-all reveal">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">AI Insights</h4>
+                    <p class="text-white/40 text-sm leading-relaxed">Predictive analytics that help you save before you spend.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 text-center">
+        <div class="text-2xl font-black tracking-tighter mb-8">NEXA<span class="text-emerald-500">_</span>LEDGER</div>
+        <p class="text-white/20 text-xs font-bold tracking-widest uppercase mb-8">© 2026 NEXA LEDGER // ALL RIGHTS RESERVED</p>
+        <div class="flex justify-center gap-6">
+            <div class="w-10 h-10 glass rounded-full flex items-center justify-center cursor-pointer hover:text-emerald-400 transition-all">TW</div>
+            <div class="w-10 h-10 glass rounded-full flex items-center justify-center cursor-pointer hover:text-emerald-400 transition-all">GH</div>
+            <div class="w-10 h-10 glass rounded-full flex items-center justify-center cursor-pointer hover:text-emerald-400 transition-all">LN</div>
+        </div>
+    </footer>
+
+    <script>
+        // Reveal on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once for initial view
+        reveal();
+    </script>
+</body>
+</html>

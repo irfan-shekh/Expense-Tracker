@@ -1,10 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/*---break---*/
+
 @custom-variant dark (&:is(.dark *));
 
-/*---break---*/
 @layer theme, base, clerk, components, utilities;
 :root {
   --background: oklch(1 0 0);
@@ -41,8 +40,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-/*---break---*/
-
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -76,8 +73,6 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 }
-
-/*---break---*/
 
 @theme inline {
   --font-sans: var(--font-sans);
@@ -121,8 +116,6 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/*---break---*/
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -132,8 +125,85 @@
   }
   html {
     @apply font-sans;
-    html {
-  scroll-behavior: smooth;
-}
+    scroll-behavior: smooth;
   }
+}
+
+/* Aggressive Clerk Visibility Overrides */
+:root {
+  --cl-colorText: #ffffff !important;
+  --cl-colorTextSecondary: #a1a1aa !important;
+  --cl-colorInputText: #ffffff !important;
+  --cl-colorBackground: #0a0a0a !important;
+}
+
+.cl-headerTitle, 
+.cl-headerSubtitle,
+.cl-socialButtonsBlockButtonText,
+.cl-formFieldLabel,
+.cl-footerActionText,
+.cl-dividerText,
+.cl-userButtonPopoverActionButtonText,
+.cl-userButtonPopoverMainIdentifier,
+.cl-userButtonPopoverSecondaryIdentifier,
+.cl-userButtonOuterIdentifier,
+.cl-userButtonPopoverCard,
+.cl-userButtonPopoverMain,
+.cl-userButtonPopoverFooter,
+.cl-userButtonPopoverActionButton,
+.cl-formFieldInput,
+.cl-identityPreviewText,
+.cl-identityPreviewEditButton,
+.cl-viewSwitcherButton,
+.cl-alternativeMethodsActionText,
+.cl-alternativeMethodsActionLink {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+.cl-userButtonPopoverSecondaryIdentifier,
+.cl-headerSubtitle,
+.cl-footerActionText {
+  color: #a1a1aa !important; /* Slightly dimmed for hierarchy but still visible */
+}
+
+.cl-headerTitle {
+  font-weight: 900 !important;
+  font-size: 1.875rem !important;
+}
+
+.cl-formFieldLabel {
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+}
+
+.cl-formFieldInput {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.cl-socialButtonsBlockButton {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+.cl-formButtonPrimary {
+  background-color: #10b981 !important;
+  color: #000000 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase !important;
+}
+
+.cl-card, .cl-userButtonPopoverCard {
+  background-color: #0a0a0a !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.cl-userButtonPopoverActionButton:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }

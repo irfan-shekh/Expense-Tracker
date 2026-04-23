@@ -1,6 +1,7 @@
 "use client"
 import Link from 'next/link'
 import React from 'react'
+import { motion } from 'framer-motion'
 
 function BudgetItem({ budget }) {
 
@@ -10,50 +11,74 @@ function BudgetItem({ budget }) {
         return perc > 100 ? 100 : perc.toFixed(2);
     }
 
+    const percentage = calculateProgressPerc();
+    // Dynamic color: emerald if safe, amber if over 80%
+    const barColor = percentage > 80 ? 'from-amber-400 to-orange-500' : 'from-emerald-400 to-emerald-600';
+
     return (
-        <Link href={'/dashboard/expenses/' + budget?.id} >
-            <div className='p-5 border rounded-lg
-        hover:shadow-md cursor-pointer h-[170px ] flex flex-col justify-between'>
+        <Link href={'/dashboard/expenses/' + budget?.id} className="block group">
+            <motion.div
+                whileHover={{ y: -5, scale: 1.02 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className='p-6 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-[2rem]
+                hover:border-emerald-500/50 hover:shadow-[0_20px_40px_rgba(0,0,0,0.4)] 
+                cursor-pointer h-[180px] flex flex-col justify-between transition-all duration-300 relative overflow-hidden'
+            >
+                {/* Subtle internal glow */}
+                <div className="absolute -top-10 -left-10 w-24 h-24 bg-emerald-500/5 blur-3xl rounded-full" />
 
-                {/* TOP SECTION: Icon, Name, and Total Budget Amount */}
-                <div className='flex gap-2 items-center justify-between'>
-                    <div className='flex gap-2 items-center'>
-                        <h2 className='text-2xl p-3 px-4 bg-slate-100 rounded-full'>
+                {/* TOP SECTION */}
+                <div className='flex gap-2 items-start justify-between relative z-10'>
+                    <div className='flex gap-4 items-center'>
+                        <div className='text-3xl p-4 bg-white/[0.05] border border-white/5 rounded-2xl group-hover:scale-110 transition-transform'>
                             {budget?.icon}
-                        </h2>
+                        </div>
                         <div>
-                            <h2 className='font-bold'>{budget.name}</h2>
-                            <h2 className='text-sm text-gray-500'>{budget.totalItem} Item</h2>
+                            <h2 className='font-bold text-lg text-white group-hover:text-emerald-400 transition-colors'>
+                                {budget.name}
+                            </h2>
+                            <h2 className='text-xs uppercase tracking-widest text-white/40 font-semibold'>
+                                {budget.totalItem} {budget.totalItem === 1 ? 'Transaction' : 'Transactions'}
+                            </h2>
                         </div>
                     </div>
-                    {/* Ensure this stays on the far right */}
-                    <h2 className='font-bold text-purple-700 text-lg'>${budget.amount}</h2>
+                    <div className='text-right'>
+                        <h2 className='font-black text-xl text-white'>${budget.amount}</h2>
+                        <p className='text-[10px] text-white/30 uppercase tracking-tighter'>Limit</p>
+                    </div>
                 </div>
 
-                {/* BOTTOM SECTION: Spend vs Remaining and Progress Bar */}
-                <div className='mt-5'>
+                {/* BOTTOM SECTION */}
+                <div className='mt-5 relative z-10'>
                     <div className='flex items-center justify-between mb-3'>
-                        <h2 className='textz text-slate-400'>
-                            ${budget.totalSpend ? budget.totalSpend : 0} Spent
+                        <h2 className='text-xs font-medium text-white/60'>
+                            <span className='text-emerald-400'>${budget.totalSpend || 0}</span>
+                            <span className='opacity-40'> / ${budget.amount} Spent</span>
                         </h2>
-                        <h2 className='text-xs text-slate-400'>
-                            ${budget.amount - (budget.totalSpend || 0)} Remaining
+                        <h2 className='text-[10px] font-bold text-white/30 uppercase'>
+                            {100 - percentage}% Left
                         </h2>
                     </div>
 
-                    {/* Progress Bar Container */}
-                    <div className='w-full bg-slate-200 h-2 rounded-full overflow-hidden'>
-                        <div
-                            className='bg-purple-700 h-2 rounded-full transition-all duration-500'
-                            style={{
-                                width: `${calculateProgressPerc()}%`
-                            }}
+                    {/* Premium Progress Bar */}
+                    <div className='w-full bg-white/5 h-2.5 rounded-full overflow-hidden border border-white/5'>
+                        <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${percentage}%` }}
+                            transition={{ duration: 1, ease: "circOut" }}
+                            className={`h-full rounded-full bg-gradient-to-r ${barColor} relative shadow-[0_0_15px_rgba(52,211,153,0.3)]`}
                         >
-                        </div>
+                            {/* Animated "shine" effect on the bar */}
+                            <motion.div
+                                animate={{ x: ['-100%', '200%'] }}
+                                transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
+                                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent w-1/2"
+                            />
+                        </motion.div>
                     </div>
                 </div>
-
-            </div>
+            </motion.div>
         </Link>
     )
 }

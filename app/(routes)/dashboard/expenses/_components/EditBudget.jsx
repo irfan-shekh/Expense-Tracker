@@ -1,7 +1,7 @@
 "use client"
-import { Button } from '@/components/ui/button'
-import { PenBox } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { PenBox, Sparkles } from 'lucide-react'
 import {
     Dialog,
     DialogClose,
@@ -12,20 +12,20 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import EmojiPicker from 'emoji-picker-react'
+import EmojiPicker, { Theme } from 'emoji-picker-react'
 import { useUser } from '@clerk/nextjs'
 import { Input } from '@/components/ui/input'
 import { db } from '@/utils/dbConfig'
 import { Budgets } from '@/utils/schema'
 import { eq } from 'drizzle-orm'
 import { toast } from 'sonner'
+import { motion } from 'framer-motion'
 
 function EditBudget({ budgetInfo, refreshData }) {
     const [emojiIcon, setEmojiIcon] = useState(budgetInfo?.icon);
     const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
-
-    const [name, setName] = useState();
-    const [amount, setAmount] = useState();
+    const [name, setName] = useState(budgetInfo?.name);
+    const [amount, setAmount] = useState(budgetInfo?.amount);
 
     const { user } = useUser();
 
@@ -37,7 +37,6 @@ function EditBudget({ budgetInfo, refreshData }) {
         }
     }, [budgetInfo])
 
-   
     const onUpdateBudget = async () => {
         const result = await db.update(Budgets).set({
             name: name,
@@ -48,7 +47,7 @@ function EditBudget({ budgetInfo, refreshData }) {
 
         if (result) {
             refreshData();
-            toast('Budget Updated!');
+            toast.success('Budget Protocols Updated');
         }
     }
 
@@ -56,62 +55,80 @@ function EditBudget({ budgetInfo, refreshData }) {
         <div>
             <Dialog>
                 <DialogTrigger asChild>
-                    <Button className="flex gap-2"> <PenBox /> Edit</Button>
+                    <Button variant="outline" className="flex gap-2 border-white/10 bg-white/5 hover:bg-white/10 hover:border-emerald-500/50 text-white transition-all rounded-xl">
+                        <PenBox className="h-4 w-4" /> Edit
+                    </Button>
                 </DialogTrigger>
-                <DialogContent>
+
+                <DialogContent className="bg-[#0f0f0f] border-white/10 text-white rounded-[2rem] sm:max-w-[425px]">
                     <DialogHeader>
-                        <DialogTitle>Update Budget</DialogTitle>
-                        <DialogDescription>
-                            Update your budget details below.
+                        <DialogTitle className="text-2xl font-black tracking-tight flex items-center gap-2">
+                            <Sparkles className="h-5 w-5 text-emerald-400" />
+                            Refine Budget
+                        </DialogTitle>
+                        <DialogDescription className="text-white/40">
+                            Adjust your financial targets and iconography.
                         </DialogDescription>
                     </DialogHeader>
 
-                 
-                    <div className='mt-5'>
-                        <Button variant="outline"
-                            className="text-lg"
-                            onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
-                        >
-                            {emojiIcon}
-                        </Button>
-                        
-                        <div className='absolute z-20'>
-                            <EmojiPicker
-                                open={openEmojiPicker}
-                                onEmojiClick={(e) => {
-                                    setEmojiIcon(e.emoji)
-                                    setOpenEmojiPicker(false)
-                                }}
-                            />
+                    <div className='mt-6 space-y-6'>
+                        {/* Emoji Selection Section */}
+                        <div className='flex flex-col items-center justify-center space-y-3'>
+                            <button
+                                type="button"
+                                className="text-5xl p-6 bg-white/5 rounded-3xl border border-white/10 hover:border-emerald-400/50 transition-all active:scale-95"
+                                onClick={() => setOpenEmojiPicker(!openEmojiPicker)}
+                            >
+                                {emojiIcon}
+                            </button>
+                            <p className="text-[10px] uppercase tracking-[0.2em] font-black text-white/20">Update Icon</p>
+
+                            {openEmojiPicker && (
+                                <div className='absolute z-50 mt-20'>
+                                    <EmojiPicker
+                                        theme={Theme.DARK}
+                                        onEmojiClick={(e) => {
+                                            setEmojiIcon(e.emoji)
+                                            setOpenEmojiPicker(false)
+                                        }}
+                                    />
+                                </div>
+                            )}
                         </div>
 
-                        <div className='mt-2'>
-                            <h2 className='text-black font-medium my-1'>Budget Name</h2>
-                            <Input 
-                                placeholder="e.g. Home Decor"
-                                defaultValue={budgetInfo?.name}
-                                onChange={(e) => setName(e.target.value)}
-                            />
-                        </div>
-                        
-                        <div className='mt-2'>
-                            <h2 className='text-black font-medium my-1'>Budget Amount</h2>
-                            <Input
-                                type="number"
-                                defaultValue={budgetInfo?.amount}
-                                placeholder="e.g. 5000"
-                                onChange={(e) => setAmount(e.target.value)} 
-                            />
+                        {/* Input Fields */}
+                        <div className='space-y-4'>
+                            <div className='space-y-2'>
+                                <label className='text-[10px] font-black uppercase tracking-[0.2em] text-white/30 ml-1'>Category Name</label>
+                                <Input
+                                    className="bg-white/5 border-white/10 text-white h-12 rounded-xl focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all"
+                                    placeholder="e.g. Executive Travel"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
+
+                            <div className='space-y-2'>
+                                <label className='text-[10px] font-black uppercase tracking-[0.2em] text-white/30 ml-1'>Allocated Funds ($)</label>
+                                <Input
+                                    type="number"
+                                    className="bg-white/5 border-white/10 text-white h-12 rounded-xl focus:ring-emerald-500/20 focus:border-emerald-500/50 transition-all"
+                                    placeholder="e.g. 5000"
+                                    value={amount}
+                                    onChange={(e) => setAmount(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <DialogFooter className="sm:justify-start">
+                    <DialogFooter className="mt-8">
                         <DialogClose asChild>
                             <Button
                                 disabled={!(name && amount)}
                                 onClick={() => onUpdateBudget()}
-                                className="mt-4 p-5 w-full bg-[#4845d2] hover:bg-[#3b38c0] text-white">
-                                Update Budget
+                                className="w-full h-12 bg-emerald-600 hover:bg-emerald-500 text-black font-black text-lg rounded-xl shadow-[0_10px_20px_rgba(16,185,129,0.2)] transition-all"
+                            >
+                                Sync Changes
                             </Button>
                         </DialogClose>
                     </DialogFooter>
