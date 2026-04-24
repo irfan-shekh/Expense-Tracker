@@ -106,13 +106,6 @@ function Hero() {
 
                         {/* Bottom Gradient Overlay: Makes the image blend into the dark background */}
                         <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-
-                        {/* Play Button Overlay */}
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <div className="w-20 h-20 rounded-full bg-emerald-500 flex items-center justify-center shadow-[0_0_50px_rgba(16,185,129,0.5)] cursor-pointer hover:scale-110 active:scale-95 transition-transform z-30">
-                                <Play className="h-8 w-8 fill-black text-black ml-1" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </motion.div>

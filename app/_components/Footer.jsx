@@ -75,7 +75,7 @@ function Footer() {
                 {/* 3. Bottom Strip */}
                 <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-[11px] font-mono uppercase tracking-widest text-white/20">
-                        © {new Date().getFullYear()} TECHSHEKH_STUDIOS // ALL_RIGHTS_RESERVED
+                        © {new Date().getFullYear()} NEXA_LEDGER // ALL_RIGHTS_RESERVED
                     </p>
 
                     <motion.div
