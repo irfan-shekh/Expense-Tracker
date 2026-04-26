@@ -1,11 +1,10 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { ClerkProvider } from '@clerk/nextjs';
-import { dark } from '@clerk/themes';
+// Removed the 'dark' theme import for Clerk to use the default light theme
 import { Inter, Space_Grotesk } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 
-// Inter for body text, Space Grotesk for that "Tech/Fintech" heading feel
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
@@ -20,9 +19,9 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: 'Nexa Ledger | Premium Expense Intelligence',
-  description: 'Master your finances with cinematic analytics and real-time budget tracking.',
+  description: 'Master your finances with clean analytics and real-time budget tracking.',
   icons: {
-    icon: '/logo.svg', // Ensures your brand shows up in the browser tab
+    icon: '/logo.svg',
   }
 };
 
@@ -34,50 +33,49 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
+        // Switched to default light theme, but customized to match your branding
         variables: {
-          colorPrimary: '#10b981', // Emerald 500
-          colorBackground: '#0a0a0a',
-          colorText: '#ffffff',
-          colorInputBackground: '#111111',
-          colorInputText: '#ffffff',
-          colorTextSecondary: '#a1a1aa', // gray-400
+          colorPrimary: '#059669', // Emerald 600 for better contrast on white
+          colorBackground: '#ffffff',
+          colorText: '#0f172a', // Slate 900
+          colorInputBackground: '#f8fafc', // Slate 50
+          colorInputText: '#0f172a',
+          colorTextSecondary: '#64748b', // Slate 500
         },
         elements: {
-          card: 'bg-[#0a0a0a] border border-white/10 shadow-2xl',
-          navbar: 'bg-[#0a0a0a]',
-          headerTitle: 'text-white font-black',
-          headerSubtitle: 'text-zinc-400',
-          socialButtonsBlockButton: 'bg-white/5 border-white/10 text-white hover:bg-white/10',
-          socialButtonsBlockButtonText: 'text-white font-bold',
-          formButtonPrimary: 'bg-emerald-600 hover:bg-emerald-500 text-black font-black',
-          footerActionText: 'text-zinc-400',
-          footerActionLink: 'text-emerald-500 hover:text-emerald-400',
-          formFieldLabel: 'text-zinc-400 font-bold uppercase tracking-widest text-[10px]',
-          formFieldInput: 'bg-white/5 border-white/10 text-white focus:border-emerald-500/50 transition-all',
-          userButtonPopoverCard: 'bg-[#0a0a0a] border border-white/10',
-          userButtonPopoverActionButton: 'hover:bg-white/5',
-          userButtonPopoverActionButtonText: 'text-white',
-          userButtonPopoverActionButtonIcon: 'text-emerald-500',
+          card: 'bg-white border border-slate-200 shadow-xl',
+          navbar: 'bg-white',
+          headerTitle: 'text-slate-900 font-black',
+          headerSubtitle: 'text-slate-500',
+          socialButtonsBlockButton: 'bg-white border-slate-200 text-slate-900 hover:bg-slate-50',
+          socialButtonsBlockButtonText: 'text-slate-900 font-bold',
+          formButtonPrimary: 'bg-emerald-600 hover:bg-emerald-700 text-white font-bold',
+          footerActionText: 'text-slate-500',
+          footerActionLink: 'text-emerald-600 hover:text-emerald-700',
+          formFieldLabel: 'text-slate-500 font-bold uppercase tracking-widest text-[10px]',
+          formFieldInput: 'bg-slate-50 border-slate-200 text-slate-900 focus:border-emerald-500 transition-all',
+          userButtonPopoverCard: 'bg-white border border-slate-200 shadow-lg',
+          userButtonPopoverActionButton: 'hover:bg-slate-50',
+          userButtonPopoverActionButtonText: 'text-slate-900',
+          userButtonPopoverActionButtonIcon: 'text-emerald-600',
         }
       }}
     >
-      <html lang="en" className="dark">
+      {/* Changed class to "light" and removed colorScheme style */}
+      <html lang="en" className="light">
         <body
-          className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[#050505] text-white selection:bg-emerald-500/30`}
+          className={`${inter.variable} ${spaceGrotesk.variable} font-sans antialiased bg-[#ffffff] text-slate-900 selection:bg-emerald-100 min-h-screen`}
         >
-          {/* Modern Toaster configuration:
-              - Theme set to dark
-              - Positioned for desktop/mobile optimization
-          */}
+          <main className="min-h-screen w-full bg-[#ffffff]">
+            {children}
+          </main>
+
           <Toaster
-            theme="dark"
+            theme="light" // Switched Toaster to light
             position="bottom-right"
             richColors
             closeButton
           />
-
-          {children}
         </body>
       </html>
     </ClerkProvider>
